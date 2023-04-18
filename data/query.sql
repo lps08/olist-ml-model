@@ -1,0 +1,1 @@
+SELECT * FROM avaliacao_pedido
