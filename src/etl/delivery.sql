@@ -28,7 +28,8 @@ WITH dt_pedido AS (
 
 )
 
-SELECT idVendedor,
+SELECT '2018-01-01' as dtReference,
+       idVendedor,
        CAST(count(DISTINCT CASE WHEN date(coalesce(dtEntregue, '2018-01-01')) > date(dtEstimativaEntrega) THEN idPedido END) AS REAL) / CAST(count(DISTINCT CASE WHEN descSituacao = 'delivered' THEN idPedido END) AS REAL) AS pctPedidoAtraso,
        CAST(count(DISTINCT CASE WHEN descSituacao = 'canceled' THEN idPedido END) AS REAL) / CAST(count(DISTINCT idPedido) AS REAL) as pctPedidoCancelado,
        AVG(totalFrete) as avgFrete,
