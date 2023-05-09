@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS fs_vendedor_entrega;
+CREATE TABLE fs_vendedor_entrega AS
+
 WITH dt_pedido AS (
 
     SELECT t1.idPedido,

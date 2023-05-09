@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS fs_vendedor_avaliacao;
+CREATE TABLE fs_vendedor_avaliacao AS
+
 WITH tb_pedido as (
 
     SELECT DISTINCT

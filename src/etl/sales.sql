@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS fs_vendedor_vendas;
+CREATE TABLE fs_vendedor_vendas AS
+
 WITH tb_pedido_item AS (
 
     SELECT t2.*,

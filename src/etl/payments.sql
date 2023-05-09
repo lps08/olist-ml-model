@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS fs_vendedor_pagamentos;
+CREATE TABLE fs_vendedor_pagamentos AS
+
 WITH tb_pedidos AS (
 
     SELECT 

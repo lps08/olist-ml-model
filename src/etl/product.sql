@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS fs_vendedor_produto;
+CREATE TABLE fs_vendedor_produto AS
+
 WITH tb_join AS (
 
     SELECT DISTINCT
