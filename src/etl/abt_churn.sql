@@ -9,8 +9,8 @@ WITH tb_activate AS (
     LEFT JOIN item_pedido as t2
     ON t1.idPedido = t2.idPedido
 
-    WHERE t1.dtPedido >= '2018-01-01'
-    AND t1.dtPedido <= date('2018-01-01', '+45 days')
+    WHERE t1.dtPedido >= '{date}'
+    AND t1.dtPedido <= date('{date}', '+45 days')
     AND idVendedor IS NOT NULL
 
     GROUP BY idVendedor

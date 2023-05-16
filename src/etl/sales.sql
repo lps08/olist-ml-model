@@ -1,6 +1,3 @@
-DROP TABLE IF EXISTS fs_vendedor_vendas;
-CREATE TABLE fs_vendedor_vendas AS
-
 WITH tb_pedido_item AS (
 
     SELECT t2.*,
@@ -11,8 +8,8 @@ WITH tb_pedido_item AS (
     LEFT JOIN item_pedido as t2
     ON t1.idPedido = t2.idPedido
 
-    WHERE t1.dtPedido < '2018-01-01'
-    AND t1.idPedido >= julianday('2018-01-01', '-6 months')
+    WHERE t1.dtPedido < '{date}'
+    AND t1.idPedido >= julianday('{date}', '-6 months')
     AND t2.idVendedor IS NOT NULL
 
 ),
@@ -24,7 +21,7 @@ tb_summary AS (
         count(DISTINCT date(dtPedido)) qtdeDias,
         count(idProduto) as qtItems,
         --    the min difference means that dtPedido it's the highest date
-        min((strftime('%s', '2018-01-01') - strftime('%s', dtPedido)) / 86400) as qtRecencia,
+        min((strftime('%s', '{date}') - strftime('%s', dtPedido)) / 86400) as qtRecencia,
         sum(vlPreco) / count(DISTINCT idPedido) AS avgTicket,
         avg(vlPreco) AS avgValorProduto,
         max(vlPreco) AS maxValorProduto,
@@ -65,14 +62,14 @@ tb_life AS (
 
     SELECT t2.idVendedor,
         sum(vlPreco) AS LTV,
-        max((strftime('%s', '2018-01-01') - strftime('%s', dtPedido)) / 86400) AS qtdeDiasBase
+        max((strftime('%s', '{date}') - strftime('%s', dtPedido)) / 86400) AS qtdeDiasBase
 
     FROM pedido AS t1
 
     LEFT JOIN item_pedido as t2
     ON t1.idPedido = t2.idPedido
 
-    WHERE t1.dtPedido < '2018-01-01'
+    WHERE t1.dtPedido < '{date}'
     AND t2.idVendedor IS NOT NULL
 
     GROUP BY t2.idVendedor
@@ -111,7 +108,8 @@ tb_interval AS (
 
 )
 
-SELECT '2018-01-01' AS dtReference,
+SELECT '{date}' AS dtReference,
+       datetime('now') as dtInjestion,
        t1.*,
        t2.minVlPedido,
        t2.maxVlPedido,

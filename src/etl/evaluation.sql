@@ -1,6 +1,3 @@
-DROP TABLE IF EXISTS fs_vendedor_avaliacao;
-CREATE TABLE fs_vendedor_avaliacao AS
-
 WITH tb_pedido as (
 
     SELECT DISTINCT
@@ -12,8 +9,8 @@ WITH tb_pedido as (
     LEFT JOIN item_pedido as t2
     ON t1.idPedido = t2.idPedido
 
-    WHERE t1.dtPedido < '2018-01-01'
-    AND t1.dtPedido >= julianday('2018-01-01', '-6 months')
+    WHERE t1.dtPedido < '{date}'
+    AND t1.dtPedido >= julianday('{date}', '-6 months')
     AND t2.idVendedor IS NOT NULL
 
 ),
@@ -44,7 +41,8 @@ tb_summary AS (
 
 )
 
-SELECT '2018-01-01' as dtReference,
+SELECT '{date}' as dtReference,
+       datetime('now') as dtInjestor,
        * 
 
 FROM tb_summary
