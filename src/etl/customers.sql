@@ -14,8 +14,8 @@ WITH tb_join AS (
     LEFT JOIN cliente as t3
     ON t1.idCliente = t3.idCliente
 
-    WHERE dtPedido < '2018-01-01'
-    AND dtPedido >= julianday('2018-01-01', '-6 months')
+    WHERE dtPedido < '{date}'
+    AND dtPedido >= julianday('{date}', '-6 months')
     AND idVendedor IS NOT NULL
 
 ),
@@ -60,7 +60,8 @@ tb_group AS (
 )
 
 SELECT 
-    '2018-01-01' AS dtReference,
+    '{date}' AS dtReference,
+    datetime('now') AS dtInjestion,
     * 
 
 FROM tb_group

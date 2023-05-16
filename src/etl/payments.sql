@@ -10,8 +10,8 @@ WITH tb_pedidos AS (
     LEFT JOIN item_pedido as t2
     ON t1.idPedido = t2.idPedido
 
-    WHERE t1.dtPedido < '2018-01-01'
-    AND t1.dtPedido >= julianday('2018-01-01', '-6 months')
+    WHERE t1.dtPedido < '{date}'
+    AND t1.dtPedido >= julianday('{date}', '-6 months')
     AND idVendedor IS NOT NULL
 
 ),
@@ -85,7 +85,8 @@ tb_cartao AS (
 
 )
 
-SELECT '2018-01-01' as dtReference,
+SELECT '{date}' as dtReference,
+       datetime('now') as dtInjestion,
        t1.*,
        t2.avgQtdeParcelas,
        t2.maxQtdeParcelas,
