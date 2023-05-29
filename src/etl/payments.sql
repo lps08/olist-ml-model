@@ -55,15 +55,15 @@ tb_summary AS (
     sum(case when descTipoPagamento = 'voucher'then vlPedidoMeioPagamento else 0 end) as valor_voucher_pedido,
     sum(case when descTipoPagamento = 'debit_card'then vlPedidoMeioPagamento else 0 end) as valor_debit_card_pedido,
 
-    sum(case when descTipoPagamento = 'boleto' then qtdePedidoMeioPagamento else 0 end) / sum(qtdePedidoMeioPagamento) as pct_qtd_boleto_pedido,
-    sum(case when descTipoPagamento = 'credit_card' then qtdePedidoMeioPagamento else 0 end) / sum(qtdePedidoMeioPagamento) as pct_qtd_credit_card_pedido,
-    sum(case when descTipoPagamento = 'voucher' then qtdePedidoMeioPagamento else 0 end) / sum(qtdePedidoMeioPagamento) as pct_qtd_voucher_pedido,
-    sum(case when descTipoPagamento = 'debit_card' then qtdePedidoMeioPagamento else 0 end) / sum(qtdePedidoMeioPagamento) as pct_qtd_debit_card_pedido,
+    CAST(sum(case when descTipoPagamento = 'boleto' then qtdePedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(qtdePedidoMeioPagamento) AS REAL) as pct_qtd_boleto_pedido,
+    CAST(sum(case when descTipoPagamento = 'credit_card' then qtdePedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(qtdePedidoMeioPagamento) AS REAL) as pct_qtd_credit_card_pedido,
+    CAST(sum(case when descTipoPagamento = 'voucher' then qtdePedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(qtdePedidoMeioPagamento) AS REAL) as pct_qtd_voucher_pedido,
+    CAST(sum(case when descTipoPagamento = 'debit_card' then qtdePedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(qtdePedidoMeioPagamento) AS REAL) as pct_qtd_debit_card_pedido,
 
-    sum(case when descTipoPagamento = 'boleto'then vlPedidoMeioPagamento else 0 end) / sum(vlPedidoMeioPagamento) as pct_valor_boleto_pedido,
-    sum(case when descTipoPagamento = 'credit_card'then vlPedidoMeioPagamento else 0 end) / sum(vlPedidoMeioPagamento) as pct_valor_credit_card_pedido,
-    sum(case when descTipoPagamento = 'voucher'then vlPedidoMeioPagamento else 0 end) / sum(vlPedidoMeioPagamento) as pct_valor_voucher_pedido,
-    sum(case when descTipoPagamento = 'debit_card'then vlPedidoMeioPagamento else 0 end) / sum(vlPedidoMeioPagamento) as pct_valor_debit_card_pedido
+    CAST(sum(case when descTipoPagamento = 'boleto'then vlPedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(vlPedidoMeioPagamento) AS REAL) as pct_valor_boleto_pedido,
+    CAST(sum(case when descTipoPagamento = 'credit_card'then vlPedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(vlPedidoMeioPagamento) AS REAL) as pct_valor_credit_card_pedido,
+    CAST(sum(case when descTipoPagamento = 'voucher'then vlPedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(vlPedidoMeioPagamento) AS REAL) as pct_valor_voucher_pedido,
+    CAST(sum(case when descTipoPagamento = 'debit_card'then vlPedidoMeioPagamento else 0 end) AS REAL)/ CAST(sum(vlPedidoMeioPagamento) AS REAL) as pct_valor_debit_card_pedido
 
     FROM tb_group
     GROUP BY idVendedor
