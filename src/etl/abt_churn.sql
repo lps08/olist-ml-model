@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS abt_olist_churn;
+CREATE TABLE abt_olist_churn AS
+
 WITH tb_features AS (
 
     SELECT  t1.dtReference,
