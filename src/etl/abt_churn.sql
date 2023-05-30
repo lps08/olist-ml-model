@@ -102,29 +102,30 @@ WITH tb_features AS (
             t6.pctCategoriabebes,
             t6.pctCategoriaeletronicos
 
-    FROM fs_vendedor_vendas AS t1
+    FROM sales AS t1
 
-    LEFT JOIN fs_vendedor_avaliacao AS t2
+    LEFT JOIN evaluation AS t2
     ON t1.idVendedor = t2.idVendedor
     AND t1.dtReference = t2.dtReference
 
-    LEFT JOIN fs_vendedor_cliente AS t3
+    LEFT JOIN customers AS t3
     ON t1.idVendedor = t3.idVendedor
     AND t1.dtReference = t3.dtReference
 
-    LEFT JOIN fs_vendedor_entrega AS t4
+    LEFT JOIN delivery AS t4
     ON t1.idVendedor = t4.idVendedor
     AND t1.dtReference = t4.dtReference
 
-    LEFT JOIN fs_vendedor_pagamentos AS t5
+    LEFT JOIN payments AS t5
     ON t1.idVendedor = t5.idVendedor
     AND t1.dtReference = t5.dtReference
 
-    LEFT JOIN fs_vendedor_produto AS t6
+    LEFT JOIN product AS t6
     ON t1.idVendedor = t6.idVendedor
     AND t1.dtReference = t6.dtReference
 
     WHERE t1.qtRecencia <= 45
+    AND  strftime('%d', t1.dtReference) = '01'
 
 ),
 
